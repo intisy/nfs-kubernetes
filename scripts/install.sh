@@ -83,7 +83,7 @@ spec:
     spec:
       containers:
       - name: nfs-server
-        image: itsthenetwork/nfs-server-alpine:12
+        image: itsthenetwork/nfs-server-alpine:latest-arm
         securityContext:
           privileged: true
           capabilities:
