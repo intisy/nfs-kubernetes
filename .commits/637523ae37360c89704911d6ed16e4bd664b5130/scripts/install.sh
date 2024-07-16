@@ -54,7 +54,7 @@ spec:
     spec:
       containers:
       - name: nfs-server
-        image: itsthenetwork/nfs-server-alpine:latest
+        image: openebs/nfs-server-alpine:latest
         securityContext:
           capabilities:
             add: ["SYS_ADMIN", "SETPCAP"]
