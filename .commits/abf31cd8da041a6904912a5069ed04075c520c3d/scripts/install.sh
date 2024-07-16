@@ -133,16 +133,21 @@ spec:
   - protocol: TCP
     port: 2049
     targetPort: 2049
+    name: port-1
   - protocol: TCP
     port: 111
     targetPort: 111
+    name: port-2
   - protocol: TCP
     port: 32765
     targetPort: 32765
+    name: port-3
   - protocol: TCP
     port: 32766
     targetPort: 32766
+    name: port-4
   - protocol: TCP
     port: 32767
     targetPort: 32767
+    name: port-5
 OEF
