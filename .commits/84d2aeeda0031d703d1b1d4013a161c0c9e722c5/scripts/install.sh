@@ -32,7 +32,7 @@ metadata:
   namespace: default
 spec:
   ports:
-    - port: 2049
+  - port: 2049
   selector:
     app: nfs-server
 OEF
@@ -53,13 +53,14 @@ spec:
         app: nfs-server
     spec:
       containers:
-        - name: nfs-server
-          image: openebs/nfs-server-alpine:latest
-          ports:
-            - containerPort: 2049
-          securityContext:
-            privileged: true
-          env:
-            - name: SHARED_DIRECTORY
-              value: /nfsshare
+      - name: nfs-server
+        image: openebs/nfs-server-alpine:latest
+        securityContext:
+          capabilities:
+            add: ["SYS_ADMIN", "SETPCAP"]
+        ports:
+        - containerPort: 2049
+        env:
+        - name: SHARED_DIRECTORY
+          value: /nfsshare
 OEF
