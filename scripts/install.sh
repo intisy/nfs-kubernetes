@@ -34,24 +34,38 @@ metadata:
   name: nfs-root-pv
 spec:
   capacity:
-    storage: 100Gi
+    storage: 1500Gi
+  volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: /mnt/data
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  claimRef:
+    namespace: default
+    name: nfs-root-pv-claim
+  storageClassName: local-storage
+  local:
+    path: "/mnt/data"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: node-role.kubernetes.io/control-plane
+          operator: In
+          values:
+          - "true"
 OEF
-kubectl apply -f - <<OEF
+kubectl apply -f - <<EOF
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-root-pvc
+  name: nfs-root-pv-claim
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 100Gi
-OEF
+      storage: 1500Gi
+EOF
 kubectl apply -f - <<OEF
 apiVersion: apps/v1
 kind: Deployment
@@ -105,7 +119,7 @@ spec:
           path: /lib/modules
       - name: nfs-root
         persistentVolumeClaim:
-          claimName: nfs-root-pvc
+          claimName: nfs-root-pv-claim
 OEF
 kubectl apply -f - <<OEF
 apiVersion: v1
