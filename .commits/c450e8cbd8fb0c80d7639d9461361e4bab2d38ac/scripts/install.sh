@@ -54,12 +54,12 @@ spec:
     spec:
       containers:
         - name: nfs-server
-          image: itsthenetwork/nfs-server-alpine:latest
+          image: openebs/nfs-server-alpine:latest
           ports:
             - containerPort: 2049
           securityContext:
             privileged: true
           env:
             - name: SHARED_DIRECTORY
-              value: /exports
+              value: /nfsshare
 OEF
