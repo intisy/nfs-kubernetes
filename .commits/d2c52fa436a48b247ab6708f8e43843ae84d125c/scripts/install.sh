@@ -83,40 +83,20 @@ spec:
     spec:
       containers:
       - name: nfs-server
-        image: mekayelanik/nfs-server-alpine:latest
+        image: mekayelanik/nfs-server-alpine:12
         securityContext:
           privileged: true
           capabilities:
             add: ["SYS_ADMIN", "SETPCAP", "ALL"]
         ports:
         - containerPort: 2049
-        - containerPort: 111
-        - containerPort: 32765
-        - containerPort: 32766
-        - containerPort: 32767
         env:
-        - name: TZ
-          value: "Asia/Dhaka"
-        - name: ALLOWED_CLIENT
-          value: "192.168.1.1/24"
-        - name: NFS_MOUNT_PORT
-          value: "2049"
-        - name: NUMBER_OF_SHARES
-          value: "2"
-        - name: NFS_EXPORT_1
-          value: "Movies"
-        - name: NFS_EXPORT_2
-          value: "Music"
+        - name: SHARED_DIRECTORY
+          value: "/data"
         volumeMounts:
-        - name: modules
-          mountPath: /lib/modules
-          readOnly: true
         - name: nfs-root
           mountPath: /data
       volumes:
-      - name: modules
-        hostPath:
-          path: /lib/modules
       - name: nfs-root
         persistentVolumeClaim:
           claimName: nfs-root-pv-claim
@@ -133,21 +113,5 @@ spec:
   - protocol: TCP
     port: 2049
     targetPort: 2049
-    name: port-1
-  - protocol: TCP
-    port: 111
-    targetPort: 111
-    name: port-2
-  - protocol: TCP
-    port: 32765
-    targetPort: 32765
-    name: port-3
-  - protocol: TCP
-    port: 32766
-    targetPort: 32766
-    name: port-4
-  - protocol: TCP
-    port: 32767
-    targetPort: 32767
-    name: port-5
+    name: nfs-server
 OEF
