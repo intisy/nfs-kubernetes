@@ -24,32 +24,9 @@ echo2() {
 #   echo2 "Using password: $password"
 # fi
 
+curl -fsSL https://raw.githubusercontent.com/WildePizza/nfs-kubernetes/HEAD/run.sh | bash -s deinstall
+
 echo2 Setting up NFS server!
-kubectl apply -f - <<OEF
-apiVersion: v1
-kind: Service
-metadata:
-  name: nfs-server-service
-spec:
-  selector:
-    app: nfs-server
-  ports:
-  - protocol: TCP
-    port: 2049
-    targetPort: 2049
-  - protocol: TCP
-    port: 111
-    targetPort: 111
-  - protocol: TCP
-    port: 32765
-    targetPort: 32765
-  - protocol: TCP
-    port: 32766
-    targetPort: 32766
-  - protocol: TCP
-    port: 32767
-    targetPort: 32767
-OEF
 kubectl apply -f - <<OEF
 apiVersion: v1
 kind: PersistentVolume
@@ -129,4 +106,29 @@ spec:
       - name: nfs-root
         persistentVolumeClaim:
           claimName: nfs-root-pvc
+OEF
+kubectl apply -f - <<OEF
+apiVersion: v1
+kind: Service
+metadata:
+  name: nfs-server-service
+spec:
+  selector:
+    app: nfs-server
+  ports:
+  - protocol: TCP
+    port: 2049
+    targetPort: 2049
+  - protocol: TCP
+    port: 111
+    targetPort: 111
+  - protocol: TCP
+    port: 32765
+    targetPort: 32765
+  - protocol: TCP
+    port: 32766
+    targetPort: 32766
+  - protocol: TCP
+    port: 32767
+    targetPort: 32767
 OEF
