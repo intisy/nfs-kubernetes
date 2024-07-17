@@ -1,28 +1,8 @@
 #!/bin/bash
 
-username=$1
-password=$2
-gererate_password=false
-
 echo2() {
   echo -e "\033[0;33m$@\033[0m"
 }
-# generate_secure_password() {
-#   if ! command -v openssl &> /dev/null; then
-#     echo2 "Error: OpenSSL not found. Secure password generation unavailable."
-#     return 1
-#   fi
-#   length=20
-#   echo $(openssl rand -base64 $length | tr -dc 'A-Za-z0-9')
-# }
-# if [ ! -n "$password" ]; then
-#   if [ "$gererate_password" = true ]; then
-#     password=$(generate_secure_password)
-#   else
-#     password=$username
-#   fi
-#   echo2 "Using password: $password"
-# fi
 
 curl -fsSL https://raw.githubusercontent.com/WildePizza/nfs-kubernetes/HEAD/run.sh | bash -s deinstall
 
