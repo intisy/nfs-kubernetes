@@ -24,7 +24,7 @@ spec:
     name: nfs-root-pv-claim
   storageClassName: local-storage
   local:
-    path: "/mnt/data/mysql"
+    path: "/mnt/data"
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -72,14 +72,16 @@ spec:
         - containerPort: 2049
         env:
         - name: SHARED_DIRECTORY
-          value: "/mysql"
-        # - name: SHARED_DIRECTORY_2
-        #   value: "/registry"
-        # - name: SHARED_DIRECTORY_3
-        #   value: "/videos"
+          value: "/data"
+        - name: SHARED_DIRECTORY_2
+          value: "/data/mysql"
+        - name: SHARED_DIRECTORY_3
+          value: "/data/registry"
+        - name: SHARED_DIRECTORY_4
+          value: "/data/videos"
         volumeMounts:
         - name: nfs-root
-          mountPath: /mysql
+          mountPath: /data
       volumes:
       - name: nfs-root
         persistentVolumeClaim:
