@@ -89,7 +89,7 @@ kubectl apply -f - <<OEF
 apiVersion: v1
 kind: Service
 metadata:
-  name: nfs-server-service
+  name: nfs-server
 spec:
   selector:
     app: nfs-server
