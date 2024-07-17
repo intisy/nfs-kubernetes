@@ -92,7 +92,11 @@ spec:
         - containerPort: 2049
         env:
         - name: SHARED_DIRECTORY
-          value: "/data"
+          value: "/data/mysql"
+        - name: SHARED_DIRECTORY_2
+          value: "/data/registry"
+        - name: SHARED_DIRECTORY_3
+          value: "/data/videos"
         volumeMounts:
         - name: nfs-root
           mountPath: /data
