@@ -1,10 +1,14 @@
 #!/bin/bash
 
+args=$@
+pat=$1
+sha=$2
+
 echo2() {
   echo -e "\033[0;33m$@\033[0m"
 }
 
-curl -fsSL https://raw.githubusercontent.com/WildePizza/nfs-kubernetes/HEAD/run.sh | bash -s deinstall
+sudo bash kubernetes-center/run.sh repo=nfs-kubernetes raw_args="$args" action=deinstall pat=$pat sha=$sha
 
 echo2 Setting up NFS server!
 kubectl apply -f - <<OEF
