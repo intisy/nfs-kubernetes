@@ -2,12 +2,12 @@ Install
 ---------
 
 ```
-curl -fsSL https://raw.githubusercontent.com/WildePizza/nfs-kubernetes/HEAD/run.sh | bash -s install
+bash kubernetes-center/run.sh repo=nfs-kubernetes action=install pat=$PAT
 ```
 
 Deinstall
 ---------
 
 ```
-curl -fsSL https://raw.githubusercontent.com/WildePizza/nfs-kubernetes/HEAD/run.sh | bash -s deinstall
+bash kubernetes-center/run.sh repo=nfs-kubernetes action=deinstall pat=$PAT
 ```
