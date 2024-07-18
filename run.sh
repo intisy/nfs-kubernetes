@@ -2,7 +2,6 @@
 
 action=$1
 pat=$2
-arg=$3
 
 execute() {
   substring="#!/bin/bash"
@@ -12,7 +11,7 @@ execute() {
   output=$(curl -fsSL $url 2>&1)
   if [[ $output =~ $substring ]]; then
     if [ -n "$pat" ]; then
-      curl -X GET -H "Authorization: Bearer $pat" -H "Content-Type: application/json" -fsSL $url | bash -s $arg
+      curl -X GET -H "Authorization: Bearer $pat" -H "Content-Type: application/json" -fsSL $url | bash -s
     else
       curl -fsSL $url | bash -s $arg
     fi
