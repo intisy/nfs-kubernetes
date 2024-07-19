@@ -92,18 +92,20 @@ spec:
           claimName: nfs-root-pv-claim
 OEF
 kubectl apply -f - <<OEF
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: nfs-server
+  name: nfs-service
 spec:
   selector:
-    app: nfs-server
+    role: nfs
   ports:
-  - protocol: TCP
-    port: 2049
-    targetPort: 2049
-    name: nfs-server
+    - name: tcp-2049
+      port: 2049
+      protocol: TCP
+    - name: udp-111
+      port: 111
+      protocol: UDP
 OEF
 echo2 "Waiting for NFS Server to be ready..." >&2
 while [ $(kubectl get deployment nfs-server | grep -c "1/1") != "1" ]; do
