@@ -105,3 +105,7 @@ spec:
     targetPort: 2049
     name: nfs-server
 OEF
+echo2 "Waiting for NFS Server to be ready..." >&2
+while [ $(kubectl get deployment nfs-server | grep -c "1/1") != "1" ]; do
+    sleep 1
+done
