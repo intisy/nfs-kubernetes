@@ -95,10 +95,10 @@ kubectl apply -f - <<OEF
 kind: Service
 apiVersion: v1
 metadata:
-  name: nfs-service
+  name: nfs-server
 spec:
   selector:
-    role: nfs
+    app: nfs-server
   ports:
     - name: tcp-2049
       port: 2049
