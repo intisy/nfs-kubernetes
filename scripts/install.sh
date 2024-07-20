@@ -97,6 +97,7 @@ apiVersion: v1
 metadata:
   name: nfs-server
 spec:
+  type: NodePort
   selector:
     app: nfs-server
   ports:
