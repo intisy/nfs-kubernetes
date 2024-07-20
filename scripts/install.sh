@@ -97,7 +97,7 @@ apiVersion: v1
 metadata:
   name: nfs-server
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: nfs-server
   ports:
